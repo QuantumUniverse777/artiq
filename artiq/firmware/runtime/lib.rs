@@ -103,6 +103,7 @@ pub unsafe extern fn rust_main() {
     static mut LOG_BUFFER: [u8; 65536] = [0; 65536];
     BufferLogger::new(&mut LOG_BUFFER[..])
                  .register(move || {
+        board::uart::set_speed(921600);
         board::clock::init();
         info!("booting ARTIQ");
         info!("software version {}", GIT_COMMIT);
